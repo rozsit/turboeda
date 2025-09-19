@@ -1,0 +1,24 @@
+<section id="summary">
+  <h2>Dataset summary</h2>
+  <div class="card">
+    <p><strong>Rows:</strong> {{ summary.n_rows }} &nbsp; | &nbsp; <strong>Columns:</strong> {{ summary.n_cols }} &nbsp; | &nbsp; <strong>Memory:</strong> {{ summary.memory_mb }} MB</p>
+    <p><strong>Duplicate rows:</strong> {{ summary.duplicate_rows }}</p>
+  </div>
+  <div class="card">
+    <h3>Dtypes</h3>
+    <ul>
+      {% for col, dt in summary.dtypes.items() %}
+      <li><code>{{ col }}</code>: {{ dt }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Missing values by column</h3>
+    <ul>
+      {% for col, miss in summary.missing_count.items() %}
+      <li><code>{{ col }}</code>: {{ miss }} ({{ (summary.missing_ratio[col] * 100) | round(2) }}%)</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="muted">Roles: numeric={{ roles.numeric | length }}, categorical={{ roles.categorical | length }}, datetime={{ roles.datetime | length }}, text={{ roles.text | length }}</div>
+</section>

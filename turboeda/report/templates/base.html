@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>turboeda – EDA Report</title>
+  <style>
+    :root {
+      /* Light theme defaults */
+      --bg: #ffffff;
+      --fg: #111111;
+      --muted: #666666;
+      --card-bg: #ffffff;
+      --border: #eaeaea;
+      --link: #0a58ca;
+    }
+    .theme-dark {
+      /* Lighter dark palette + softer (grayish) text */
+      --bg: #141821;        /* page background */
+      --fg: #cfd6e0;        /* primary text */
+      --muted: #9aa4b2;     /* secondary text */
+      --card-bg: #1a1f2a;   /* cards and plot backgrounds */
+      --border: #2a3140;    /* subtle borders & gridlines */
+      --link: #79a6ff;      /* link color */
+    }
+
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    header { padding: 16px 24px; background: #111; color: #fff; }
+    .theme-dark header { background: #1a1f2a; color: var(--fg); border-bottom: 1px solid var(--border); }
+    main { display: grid; grid-template-columns: 280px 1fr; gap: 24px; padding: 24px; }
+    nav { position: sticky; top: 12px; height: max-content; border-right: 1px solid var(--border); padding-right: 16px; }
+    nav a { color: var(--link); text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    section { margin-bottom: 40px; }
+    h2 { border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .card { border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; background: var(--card-bg); }
+    .muted { color: var(--muted); font-size: 0.9em; }
+    code { background: rgba(127,127,127,0.12); padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body class="theme-{{ theme }}">
+  <header>
+    <h1>turboeda – Exploratory Data Analysis Report</h1>
+    <div class="muted">Interactive HTML with Plotly (save this page locally to share).</div>
+  </header>
+  <main>
+    <nav>
+      <ul>
+        <li><a href="#summary">Dataset summary</a></li>
+        <li><a href="#variables">Variables</a></li>
+        <li><a href="#correlations">Correlations</a></li>
+      </ul>
+    </nav>
+    <div>
+      {{ summary_section|safe }}
+      {{ variables_section|safe }}
+      {{ correlations_section|safe }}
+    </div>
+  </main>
+</body>
+</html>

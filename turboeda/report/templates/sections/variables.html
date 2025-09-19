@@ -1,0 +1,87 @@
+<section id="variables">
+  <h2>Variables</h2>
+  <div class="card">
+    <h3>Numeric</h3>
+    {% if numeric %}
+      {% for col, info in numeric.items() %}
+        <div class="card">
+          <h4><code>{{ col }}</code></h4>
+          <ul>
+            <li>count: {{ info.describe.get('count') }}</li>
+            <li>mean: {{ info.describe.get('mean') }}</li>
+            <li>std: {{ info.describe.get('std') }}</li>
+            <li>min: {{ info.describe.get('min') }}, 1%: {{ info.describe.get('1%') }}, 5%: {{ info.describe.get('5%') }}</li>
+            <li>25%: {{ info.describe.get('25%') }}, 50%: {{ info.describe.get('50%') }}, 75%: {{ info.describe.get('75%') }}</li>
+            <li>95%: {{ info.describe.get('95%') }}, 99%: {{ info.describe.get('99%') }}, max: {{ info.describe.get('max') }}</li>
+            <li>IQR outliers (1.5×IQR rule): {{ info.iqr_outliers }}</li>
+            <li>Missing: {{ info.n_missing }}</li>
+          </ul>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No numeric columns detected.</p>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h3>Categorical</h3>
+    {% if categorical %}
+      {% for col, info in categorical.items() %}
+        <div class="card">
+          <h4><code>{{ col }}</code></h4>
+          <p>Unique: {{ info.n_unique }}, Rare (&lt;1% or &lt;2 rows): {{ info.rare_below_threshold }}, Missing: {{ info.n_missing }}</p>
+          <ul>
+            {% for val, cnt in info.top_values.items() %}
+              <li>{{ val }}: {{ cnt }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No categorical columns detected.</p>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h3>Datetime</h3>
+    {% if dt %}
+      {% for col, info in dt.items() %}
+        <div class="card">
+          <h4><code>{{ col }}</code></h4>
+          <ul>
+            <li>Min: {{ info.min }}</li>
+            <li>Max: {{ info.max }}</li>
+            <li>Missing: {{ info.n_missing }}</li>
+            <li>Estimated frequency: {{ info.frequency }}</li>
+          </ul>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">No datetime columns detected.</p>
+    {% endif %}
+  </div>
+
+  {% if numeric_figs %}
+    <div class="card">
+      <h3>Numeric distributions (Plotly)</h3>
+      {% for fig in numeric_figs %}
+        <div class="card">
+          <h4>{{ fig.col }}</h4>
+          {{ fig.div | safe }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if categorical_figs %}
+    <div class="card">
+      <h3>Top categories (Plotly)</h3>
+      {% for fig in categorical_figs %}
+        <div class="card">
+          <h4>{{ fig.col }}</h4>
+          {{ fig.div | safe }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>

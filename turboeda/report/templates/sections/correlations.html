@@ -1,0 +1,22 @@
+<section id="correlations">
+  <h2>Correlations</h2>
+  <div class="muted">Columns included (capped): {{ cols | length }}</div>
+
+  {% if pearson_div %}
+    <div class="card">
+      <h3>Pearson</h3>
+      {{ pearson_div | safe }}
+    </div>
+  {% else %}
+    <p class="muted">Not enough numeric columns for Pearson correlation.</p>
+  {% endif %}
+
+  {% if spearman_div %}
+    <div class="card">
+      <h3>Spearman</h3>
+      {{ spearman_div | safe }}
+    </div>
+  {% else %}
+    <p class="muted">Not enough numeric columns for Spearman correlation.</p>
+  {% endif %}
+</section>
