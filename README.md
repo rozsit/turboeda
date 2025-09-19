@@ -1,3 +1,4 @@
+
 # turboeda
 
 **turboeda** is a one-command Exploratory Data Analysis (EDA) report generator.  
@@ -7,7 +8,7 @@ Give it a CSV or XLSX file — it automatically analyzes the data and creates a 
 
 ## 📦 Installation
 
-### From PyPI (when available)
+### From PyPI
 ```bash
 pip install turboeda
 ```
@@ -31,14 +32,21 @@ pip install -e .
 
 ## 🚀 Usage (CLI)
 
+**Short form (recommended):**
+```bash
+turboeda "data.csv" -o "report.html" --open
+# Excel (auto-uses the FIRST sheet if --sheet is omitted):
+turboeda "data.xlsx" --sheet "Sheet1" -o "report.html" --open
+```
+
+**Long form (also supported, legacy-friendly):**
 ```bash
 turboeda report "data.csv" -o "report.html" --open
-# Excel (auto-uses the FIRST sheet if --sheet is omitted):
 turboeda report "data.xlsx" --sheet "Sheet1" -o "report.html" --open
 ```
 
 **Default naming rule:**  
-If `-o/--out` is not provided, the HTML is saved as **`<input_basename>_report.html`** in the **same folder** as the input file.
+If `-o/--out` is not provided, the HTML is saved as **`<input_basename>_report.html`** in the **same folder** as the input file.  
 Examples:
 - `C:\data\Iris.csv` → `C:\data\Iris_report.html`
 - `/Users/me/data/sales.xlsx` → `/Users/me/data/sales_report.html`
@@ -97,11 +105,11 @@ Charts adopt the chosen theme as well (Plotly `plotly_dark` vs `plotly`).
 
 - Dark (default):
   ```bash
-  turboeda report "data.csv" --theme dark
+  turboeda "data.csv" --theme dark
   ```
 - Light:
   ```bash
-  turboeda report "data.csv" --theme light
+  turboeda "data.csv" --theme light
   ```
 
 ---
