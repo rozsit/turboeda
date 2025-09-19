@@ -1,5 +1,8 @@
 
 # turboeda
+[![PyPI version](https://img.shields.io/pypi/v/turboeda.svg)](https://pypi.org/project/turboeda/)
+[![Python versions](https://img.shields.io/pypi/pyversions/turboeda.svg)](https://pypi.org/project/turboeda/)
+
 
 **turboeda** is a one-command Exploratory Data Analysis (EDA) report generator.  
 Give it a CSV or XLSX file — it automatically analyzes the data and creates a polished, interactive HTML report with Plotly charts.
